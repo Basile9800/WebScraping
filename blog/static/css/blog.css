@@ -14,10 +14,9 @@
     text-decoration: none;
 }
 
-.page-header h2,
 .page-header h2 a,
 .page-header h2 a:visited,
-.page-header h2 a:active {
+.page-header h1 a:active {
     color: #C25100;
     font-size: 20pt;
     text-decoration: none;
