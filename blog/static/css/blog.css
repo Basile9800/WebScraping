@@ -1,5 +1,5 @@
 .page-header {
-    background-color: #208188;
+    background-color: #00c2a893;
     margin-top: 0;
     margin-bottom: 40px;
     padding: 20px 20px 20px 40px;
@@ -15,10 +15,7 @@
     text-decoration: none;
 }
 
-.page-header p,
-.page-header p a,
-.page-header p a:visited,
-.page-header p a:active {
+p {
     color: #ffffff;
     font-size: 14pt;
     text-decoration: none;
