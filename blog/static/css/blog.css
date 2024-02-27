@@ -17,7 +17,7 @@
 .page-header h2 a,
 .page-header h2 a:visited,
 .page-header h1 a:active {
-    color: #C25100;
+    color: #0275a79c;
     font-size: 20pt;
     text-decoration: none;
 }
@@ -72,12 +72,12 @@ h4 {
 
 .btn-secondary,
 .btn-secondary:visited {
-    color: #C25100;
+    color: #0275a79c;
     background: none;
-    border-color: #C25100;
+    border-color: #0275a79c;
 }
 
 .btn-secondary:hover {
     color: #FFFFFF;
-    background-color: #C25100;
+    background-color: #0275a79c;
 }
