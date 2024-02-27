@@ -65,6 +65,11 @@ h4 {
     float: right;
 }
 
+.post-image {
+    max-width: 100%;
+    height: auto;
+}
+
 .btn-secondary,
 .btn-secondary:visited {
     color: #C25100;
