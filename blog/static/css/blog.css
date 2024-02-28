@@ -1,5 +1,8 @@
 .page-header {
-    background-color: #0275a79c;
+    background-image: url('affiche.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     margin-top: 0;
     margin-bottom: 40px;
     padding: 20px 20px 20px 40px;
@@ -10,8 +13,18 @@
 .page-header h1 a:visited,
 .page-header h1 a:active {
     color: #ffffff;
-    font-size: 36pt;
+    font-size: 80pt;
     text-decoration: none;
+    -webkit-text-stroke-width: 2px; 
+    -webkit-text-stroke-color: #000000;
+}
+
+.page-header p {
+    color: #000000;
+    font-size: 17pt;
+    text-decoration: none;
+    -webkit-text-stroke-width: 2px; 
+    -webkit-text-stroke-color: #000000;
 }
 
 .page-header h2 a,
@@ -27,6 +40,18 @@ h2,
 h3,
 h4 {
     font-family: 'Lobster', cursive;
+}
+
+.honk-<uniquifier> {
+    font-family: "Honk", system-ui; 
+    font-weight: 400; 
+    font-size: 100pt;
+    font-style: normal; 
+    font-variation-settings: "MORF" 15, "SHLN" 50; 
+}
+
+h1 {
+    font-family: 'Honk', system-ui;
 }
 
 .date {
