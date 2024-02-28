@@ -26,4 +26,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static('/static/css/', document_root=settings.STATIC_ROOT + '/css/')
+    urlpatterns += static('/static/css/', document_root=str(settings.STATIC_ROOT) + '/css/')
