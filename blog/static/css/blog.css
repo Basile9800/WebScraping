@@ -12,19 +12,19 @@
 .page-header h1 a,
 .page-header h1 a:visited,
 .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 80pt;
+    font-family: 'Libre Barcode 39 Text', system-ui;
+    color: #ef020233;
+    font-size: 150pt;
     text-decoration: none;
-    -webkit-text-stroke-width: 2px; 
+    -webkit-text-stroke-width: 2.2px; 
     -webkit-text-stroke-color: #000000;
 }
 
 .page-header p {
+    font-family: 'Noto Sans Buhid', system-ui;
     color: #000000;
-    font-size: 17pt;
+    font-size: 18pt;
     text-decoration: none;
-    -webkit-text-stroke-width: 2px; 
-    -webkit-text-stroke-color: #000000;
 }
 
 .page-header h2 a,
@@ -35,20 +35,14 @@
     text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: 'Libre Barcode 39 Text', system-ui;
-    font-size: 50pt;
-    color: #fe7300;
+/*
+    color: #ef020233;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
-}
-
 h1 {
     font-family: 'Honk', system-ui;
 }
+*/
 
 .date {
     color: #828282;
@@ -79,21 +73,46 @@ h1 {
 .post h2 a,
 .post h2 a:visited,
 .post h2 a:active {
-    text-decoration: none;
     font-family: 'Libre Barcode 39 Text', system-ui;
+    background-clip: text;
+    background-image: url('affiche.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
     font-size: 50pt;
-    color: #fe7300;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
+    text-decoration: none;
 }
 
 .col h2 a,
 .col h2 a:visited,
 .col h2 a:active {
-    text-decoration: none;
     font-family: 'Libre Barcode 39 Text', system-ui;
+    background-clip: text;
+    background-image: url('affiche.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
     font-size: 50pt;
-    color: #fe7300;
+    -webkit-text-stroke-width: 1px; 
+    -webkit-text-stroke-color: #000000;
+    text-decoration: none;
+}
+
+h2,
+h3,
+h4 {
+    font-family: 'Libre Barcode 39 Text', system-ui;
+    background-clip: text;
+    background-image: url('affiche.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
 }
@@ -101,6 +120,50 @@ h1 {
 .post > .date,
 .post > .actions {
     float: right;
+}
+
+.post-content {
+    display: flex;
+}
+
+.title-banner {
+    width: 600px; 
+    background-color: #ff7301a2;
+    /*
+    background-image: url('affiche.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    border: 2px solid black;
+    */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.vertical-text {
+    color: #000000; 
+    font-size: 17px; 
+    padding: 10px; 
+    width: calc(100% - 20px);
+}
+
+.image-container {
+    flex-grow: 1; 
+    padding-left: 10px; 
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.post-image-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 
 .post-image {

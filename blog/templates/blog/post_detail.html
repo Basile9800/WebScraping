@@ -9,8 +9,16 @@
         {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
-        {% if post.image %}
-            <img src="{{ post.image.url }}" alt="Image du post" style="max-width: 100%; height: auto;">
-        {% endif %}
+        <div class="post-content">
+            <div class="title-banner">
+                <span class="vertical-text">Nous allons maintenant analyser ce graphique mdr lolllll</span>
+            </div>
+            <div class="image-container">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Image du post" width="800" height="450">
+                {% endif %}
+            </div>
+        </div>
     </article>
 {% endblock %}
+
