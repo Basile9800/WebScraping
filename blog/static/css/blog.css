@@ -128,17 +128,11 @@ h4 {
 
 .title-banner {
     width: 600px; 
-    background-color: #ff7301a2;
-    /*
-    background-image: url('affiche.jpg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center;
-    border: 2px solid black;
-    */
+    background-color: #ffffff00;
     display: flex;
     justify-content: center; 
     align-items: center; 
+    border: 2px solid black;
 }
 
 .vertical-text {
