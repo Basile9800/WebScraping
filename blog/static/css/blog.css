@@ -29,7 +29,7 @@
 
 .page-header h2 a,
 .page-header h2 a:visited,
-.page-header h1 a:active {
+.page-header h2 a:active {
     color: #0275a79c;
     font-size: 20pt;
     text-decoration: none;
@@ -39,19 +39,11 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: 'Monoton', sans-serif;
+    font-family: 'Libre Barcode 39 Text', system-ui;
     font-size: 50pt;
     color: #fe7300;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
-}
-
-.honk-<uniquifier> {
-    font-family: "Honk", system-ui; 
-    font-weight: 400; 
-    font-size: 100pt;
-    font-style: normal; 
-    font-variation-settings: "MORF" 15, "SHLN" 50; 
 }
 
 h1 {
@@ -87,7 +79,8 @@ h1 {
 .post h2 a,
 .post h2 a:visited,
 .post h2 a:active {
-    font-family: 'Monoton', sans-serif;
+    text-decoration: none;
+    font-family: 'Libre Barcode 39 Text', system-ui;
     font-size: 50pt;
     color: #fe7300;
     -webkit-text-stroke-width: 1px; 
@@ -97,7 +90,8 @@ h1 {
 .col h2 a,
 .col h2 a:visited,
 .col h2 a:active {
-    font-family: 'Monoton', sans-serif;
+    text-decoration: none;
+    font-family: 'Libre Barcode 39 Text', system-ui;
     font-size: 50pt;
     color: #fe7300;
     -webkit-text-stroke-width: 1px; 
