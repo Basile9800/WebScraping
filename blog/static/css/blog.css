@@ -1,3 +1,7 @@
+body {
+    background-color: #004466; 
+}
+
 .page-header {
     background-image: url('affiche.jpg');
     background-size: cover; 
@@ -13,7 +17,7 @@
 .page-header h1 a:visited,
 .page-header h1 a:active {
     font-family: 'Libre Barcode 39 Text', system-ui;
-    color: #ef020233;
+    color: #0222ef33;
     font-size: 150pt;
     text-decoration: none;
     -webkit-text-stroke-width: 2.2px; 
@@ -163,16 +167,4 @@ h4 {
 .post-image {
     max-width: 100%;
     height: auto;
-}
-
-.btn-secondary,
-.btn-secondary:visited {
-    color: #0275a79c;
-    background: none;
-    border-color: #0275a79c;
-}
-
-.btn-secondary:hover {
-    color: #FFFFFF;
-    background-color: #0275a79c;
 }
