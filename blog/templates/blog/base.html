@@ -27,6 +27,23 @@
         <main class="container">
             <div class="row">
                 <div class="col">
+                    <form id="searchForm">
+                        {% csrf_token %}
+                        <label for="searchName">Rechercher par nom :</label>
+                        <input type="text" id="searchName" name="searchName">
+                        <button type="submit">Rechercher</button>
+                    </form>
+    
+                    <div id="searchResults">
+                        <!-- Affichage des résultats de la recherche -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main class="container">
+            <div class="row">
+                <div class="col">
                 {% block content %}
                 {% endblock %}
                 </div>
