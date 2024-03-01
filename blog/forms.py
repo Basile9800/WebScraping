@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post, CSVImport
+from .models import Post
 
 class PostForm(forms.ModelForm):
 
@@ -8,7 +8,3 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text',)
         
-class CSVImportForm(forms.ModelForm):
-    class Meta:
-        model = CSVImport
-        fields = ('csv_file',)

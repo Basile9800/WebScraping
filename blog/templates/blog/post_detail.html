@@ -19,6 +19,26 @@
                 {% endif %}
             </div>
         </div>
+        {% if post.csv_file %}
+            <div class="csv-search">
+                <h3>Rechercher dans le fichier CSV associe :</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <label for="name">Entrez un nom :</label>
+                    <input type="text" name="name" id="name">
+                    <button type="submit">Rechercher</button>
+                </form>
+
+                {% if filtered_data %}
+                    <h3>Resultats de la recherche pour "{{ name }}" :</h3>
+                    <ul>
+                        {% for row in filtered_data %}
+                            <li>{{ row }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endif %}
     </article>
 {% endblock %}
 

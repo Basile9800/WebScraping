@@ -25,17 +25,19 @@
         </header>
 
         <main class="container">
-            <div class="row">
+            <!-- Ajout du formulaire de recherche avant les posts -->
+            <div class="row mb-3">
                 <div class="col">
-                    <form id="searchForm">
-                        {% csrf_token %}
-                        <label for="searchName">Rechercher par nom :</label>
-                        <input type="text" id="searchName" name="searchName">
-                        <button type="submit">Rechercher</button>
-                    </form>
-    
-                    <div id="searchResults">
-                        <!-- Affichage des résultats de la recherche -->
+                    <div class="search-box">
+                        <div class="bg-primary text-white p-3">
+                            <h3>Chercher quelqu'un</h3>
+                            <form method="post" action="{% url 'search_by_name' %}">
+                                {% csrf_token %}
+                                <label for="search">Entrez un nom :</label>
+                                <input type="text" name="name" id="search" class="form-control">
+                                <button type="submit" class="btn btn-light mt-2">Rechercher</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,5 +51,6 @@
                 </div>
             </div>
         </main>
+
     </body>
 </html>
