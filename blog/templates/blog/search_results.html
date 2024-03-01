@@ -3,14 +3,17 @@
 {% block content %}
     <h1>Résultats de la recherche pour "{{ name }}"</h1>
 
-    {% if posts %}
+    {% if search_results %}
         <ul>
-            {% for post in posts %}
-                <li>{{ post.title }}</li>
-                <!-- Ajoutez d'autres détails du post si nécessaire -->
+            {% for _, rows in search_results.items %}
+                {% for row in rows %}
+                    <li>{{ row|join:" | " }}</li>
+                {% endfor %}
             {% endfor %}
         </ul>
     {% else %}
         <p>Aucun résultat trouvé pour "{{ name }}"</p>
     {% endif %}
 {% endblock %}
+
+

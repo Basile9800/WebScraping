@@ -32,7 +32,21 @@ def post_new(request):
 def search_by_name(request):
     if request.method == 'POST':
         name = request.POST.get('name', '')
-        # Recherche par nom dans tous les posts
-        posts = Post.objects.filter(csv_file__icontains=name)
-        return render(request, 'search_results.html', {'posts': posts, 'name': name})
+        search_results = {}
+        posts = Post.objects.all()
+        for post in posts:
+            if post.csv_file:
+                csv_data = post.read_csv_data()
+                for row in csv_data:
+                    if len(row) > 1 and name.lower() in row[1].lower():
+                        if post.title not in search_results:
+                            search_results[post.title] = set()
+                        search_results[post.title].add(tuple(row))               
+        for title, rows_set in search_results.items():
+            search_results[title] = list(rows_set)
+        return render(request, 'blog/search_results.html', {'search_results': search_results, 'name': name})
     return render(request, 'search_form.html')
+
+
+
+          
