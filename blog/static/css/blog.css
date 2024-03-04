@@ -170,9 +170,7 @@ h2 {
     border-radius: 10px;
 }
 
-.inline-title h3 a,
-.inline-title h3 a:visited,
-.inline-title h3 a:active {
+.inline-title h3 {
     color: #ffffff;
     font-size: 20pt;
     text-decoration: none;
