@@ -170,14 +170,11 @@ h2 {
     border-radius: 10px;
 }
 
-.inline-title {
-    display: inline;
-}
-
-.search-container h3 a,
-.search-container h3 a:visited,
-.search-container h3 a:active {
+.inline-title h3 a,
+.inline-title h3 a:visited,
+.inline-title h3 a:active {
     color: #ffffff;
     font-size: 20pt;
     text-decoration: none;
+    display: inline;
 }
