@@ -26,10 +26,10 @@
 
         <main class="container">
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-md-6"> <!-- Utilisation de col-md-6 pour les écrans moyens -->
                     <div class="search-container">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col"> <!-- Utilisation de col pour que le contenu s'adapte automatiquement -->
                                 <div class="search-box">
                                     <div class="p-3">
                                         <h3>Chercher un coureur</h3>
@@ -40,10 +40,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                        </div>
+                    </div>                                        
+                </div>
+                <div class="col-md-6"> <!-- Utilisation de col-md-6 pour les écrans moyens -->
+                    <div class="search-container">
+                        <div class="row">
+                            <div class="col"> <!-- Utilisation de col pour que le contenu s'adapte automatiquement -->
                                 <div class="search-box">
                                     <div class="p-3">
-                                        <!-- Ajoutez la classe d-inline pour rendre le titre en ligne -->
                                         <h3 class="inline-title">Choisir une categorie</h3>
                                         <form id="categoryForm" method="post" action="{% url 'calculate_averages' %}">
                                             {% csrf_token %}
@@ -65,7 +70,8 @@
                 {% block content %}
                 {% endblock %}
                 </div>
-            </div>
+            </div> 
+        
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     var categorySelect = document.getElementById('categorySelect');
