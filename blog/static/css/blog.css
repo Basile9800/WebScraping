@@ -174,3 +174,7 @@ h2 {
     flex: 1;
     margin-right: 10px;
 }
+
+.inline-title {
+    display: inline;
+}
