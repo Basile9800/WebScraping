@@ -25,32 +25,74 @@
         </header>
 
         <main class="container">
-            <!-- Ajout du formulaire de recherche avant les posts -->
             <div class="row mb-3">
                 <div class="col">
-                    <div class="search-box">
-                        <div class="bg-primary text-white p-3">
-                            <h3>Chercher quelqu'un</h3>
-                            <form method="post" action="{% url 'search_by_name' %}">
-                                {% csrf_token %}
-                                <label for="search">Entrez un nom :</label>
-                                <input type="text" name="name" id="search" class="form-control">
-                                <button type="submit" class="btn btn-light mt-2">Rechercher</button>
-                            </form>
+                    <div class="search-container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="search-box">
+                                    <div class="p-3">
+                                        <h3>Chercher un coureur</h3>
+                                        <form method="post" action="{% url 'search_by_name' %}">
+                                            {% csrf_token %}
+                                            <input type="text" name="name" id="search" class="form-control">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="search-box">
+                                    <div class="p-3">
+                                        <h3>Choix categorie</h3>
+                                        <form id="categoryForm" method="post" action="{% url 'calculate_averages' %}">
+                                            {% csrf_token %}
+                                            <select id="categorySelect" name="selected_col4_value" class="form-select" title="Sélectionnez une catégorie">
+                                                {% for category in categories %}
+                                                    <option value="{{ category }}">{{ category }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-
-        <main class="container">
+            </div>                                                                                             
             <div class="row">
                 <div class="col">
                 {% block content %}
                 {% endblock %}
                 </div>
             </div>
-        </main>
-
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var categorySelect = document.getElementById('categorySelect');
+                    categorySelect.addEventListener('change', function() {
+                        var selectedCategory = categorySelect.value;
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '{% url 'calculate_averages' %}', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        
+                        // Ajouter le jeton CSRF aux en-têtes de la requête
+                        var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+                        
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    // Afficher la réponse HTML renvoyée dans un élément avec l'ID 'result'
+                                    document.getElementById('result').innerHTML = xhr.responseText;
+                                } else {
+                                    // Afficher une erreur en cas de problème avec la requête
+                                    document.getElementById('result').innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
+                                }
+                            }
+                        };
+                        xhr.send('selected_col4_value=' + selectedCategory);
+                    });
+                });                
+            </script>                             
+        </main>    
     </body>
 </html>

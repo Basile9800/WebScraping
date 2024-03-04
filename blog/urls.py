@@ -6,4 +6,6 @@ urlpatterns = [
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
     path('post/new/', views.post_new, name='post_new'),
     path('search/', views.search_by_name, name='search_by_name'),
+    path('', views.calculate_averages, name='calculate_averages'),
+    path('search/', views.calculate_averages, name='calculate_averages'),
 ]

@@ -2,18 +2,34 @@
 
 {% block content %}
     <h1>Résultats de la recherche pour "{{ name }}"</h1>
-
     {% if search_results %}
-        <ul>
-            {% for _, rows in search_results.items %}
-                {% for row in rows %}
-                    <li>{{ row|join:" | " }}</li>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Place</th>
+                    <th>Nom</th>
+                    <th>Temps</th>
+                    <th>Catégorie</th>
+                    <th>Club</th>
+                    <th>Distance (km)</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, rows in search_results.items %}
+                    {% for row in rows %}
+                        <tr>
+                            {% for column in row %}
+                                {% if forloop.counter <= 7 %}
+                                    <td>{{ column }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </ul>
+            </tbody>
+        </table>
     {% else %}
         <p>Aucun résultat trouvé pour "{{ name }}"</p>
     {% endif %}
 {% endblock %}
-
-

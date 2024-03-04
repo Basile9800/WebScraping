@@ -162,3 +162,15 @@ h2 {
     max-width: 100%;
     height: auto;
 }
+
+.search-container {
+    display: flex;
+    background-color: #006080d4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.search-box {
+    flex: 1;
+    margin-right: 10px;
+}

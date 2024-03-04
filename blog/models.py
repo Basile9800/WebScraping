@@ -30,6 +30,12 @@ class Post(models.Model):
         data = self.read_csv_data()
         filtered_data = [row for row in data if row and row[1] == name]  
         return filtered_data
+    
+    def get_first_five_columns(self):
+        data = self.read_csv_data()
+        # Extraction des cinq premières colonnes
+        first_five_columns = [row[:7] for row in data]
+        return first_five_columns
 
     def __str__(self):
         return self.title
