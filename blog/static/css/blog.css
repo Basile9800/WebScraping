@@ -173,3 +173,11 @@ h2 {
 .inline-title {
     display: inline;
 }
+
+.page-header h3 a,
+.page-header h3 a:visited,
+.page-header h3 a:active {
+    color: #ffffff;
+    font-size: 20pt;
+    text-decoration: none;
+}
