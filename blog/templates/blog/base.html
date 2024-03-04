@@ -44,7 +44,7 @@
                                 <div class="search-box">
                                     <div class="p-3">
                                         <!-- Ajoutez la classe d-inline pour rendre le titre en ligne -->
-                                        <h3 class="d-inline">Choisir une categorie</h3>
+                                        <h3 class="inline-title">Choisir une categorie</h3>
                                         <form id="categoryForm" method="post" action="{% url 'calculate_averages' %}">
                                             {% csrf_token %}
                                             <select id="categorySelect" name="selected_col4_value" class="form-select" title="Sélectionnez une catégorie">
