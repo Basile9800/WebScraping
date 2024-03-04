@@ -125,12 +125,12 @@ h2 {
 }
 
 .title-banner {
-    width: 600px; 
+    width: 500px; 
     background-color: #ffffff00;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    border: 2px solid black;
+    border: 2px solid rgb(134, 0, 0);
 }
 
 .vertical-text {
