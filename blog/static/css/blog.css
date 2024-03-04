@@ -86,6 +86,13 @@ h1 {
     text-decoration: none;
 }
 
+.post p {
+    font-family: 'Noto Sans Buhid', system-ui;
+    color: #000000;
+    font-size: 20pt;
+    text-decoration: none;
+}
+
 .col h2 a,
 .col h2 a:visited,
 .col h2 a:active {
