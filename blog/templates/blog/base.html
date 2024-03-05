@@ -87,7 +87,7 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     var categorySelect = document.getElementById('categorySelect');
                     var resultDiv = document.getElementById('result');
-            
+                
                     categorySelect.addEventListener('change', function() {
                         var selectedCategory = categorySelect.value;
                         var xhr = new XMLHttpRequest();
@@ -110,7 +110,7 @@
                                     }
                                     // Changer l'image en fonction de la catégorie sélectionnée
                                     var imgSrc = "/static/css/css/" + selectedCategory + ".png"; // ou l'extension de votre image
-                                    resultDiv.innerHTML = '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">'; // Ajouter l'image à l'élément 'result'
+                                    resultDiv.innerHTML += '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">'; // Ajouter l'image à l'élément 'result'
                                 } else {
                                     // Afficher une erreur en cas de problème avec la requête
                                     resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
@@ -119,7 +119,26 @@
                         };
                         xhr.send('selected_col4_value=' + selectedCategory);
                     });
-                });                
+                
+                    var searchForm = document.getElementById('searchForm');
+                    searchForm.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        var formData = new FormData(searchForm);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '{% url 'search_by_name' %}', true);
+                        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    resultDiv.innerHTML = xhr.responseText;
+                                } else {
+                                    resultDiv.innerHTML = '<p>Erreur : Impossible d\'effectuer la recherche.</p>';
+                                }
+                            }
+                        };
+                        xhr.send(formData);
+                    });
+                });                                
             </script>                                         
         </main>    
     </body>
