@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 import csv
+from threading import Lock
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -13,6 +14,7 @@ class Post(models.Model):
     description = models.TextField(blank=True, null=True)
     csv_file = models.FileField(upload_to='csv_files/', blank=True, null=True)
     uploaded_at = models.DateTimeField(default=timezone.now)
+    _lock = Lock()
 
     def publish(self):
         self.published_date = timezone.now()
