@@ -1,37 +1,52 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>Résultats de la recherche pour "{{ name }}"</h1>
-    {% if search_results %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Place</th>
-                    <th>Nom</th>
-                    <th>Temps</th>
-                    <th>Catégorie</th>
-                    <th>Club</th>
-                    <th>Distance (km)</th>
-                    <th>Course</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for _, rows in search_results.items %}
-                    {% for row in rows %}
-                        <tr>
-                            {% for column in row %}
-                                {% if forloop.counter <= 7 %}
-                                    <td>{{ column }}</td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Aucun résultat trouvé pour "{{ name }}"</p>
-    {% endif %}
+    <h2>Résultats de la recherche</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Place</th>
+                <th>Nom</th>
+                <th>Temps</th>
+                <th>Catégorie</th>
+                <th>Club</th>
+                <th>Distance (km)</th>
+                <th>Course</th>
+                <!-- Ajoutez les autres en-têtes de colonne selon votre besoin -->
+            </tr>
+        </thead>
+        <tbody id="searchResults">
+            <!-- Les résultats de la recherche seront affichés ici -->
+        </tbody>
+    </table>
+
+    <script>
+        // Récupérer les résultats de la recherche via JavaScript
+        fetch('{% url 'search_by_name' %}', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ name: '{{ search_query }}' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const searchResults = document.getElementById('searchResults');
+            // Afficher les résultats de la recherche dans le tableau HTML
+            data.search_results.forEach(result => {
+                const row = document.createElement('tr');
+                result.forEach(item => {
+                    const cell = document.createElement('td');
+                    cell.textContent = item;
+                    row.appendChild(cell);
+                });
+                searchResults.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des résultats de recherche :', error);
+        });
+    </script>
 {% endblock %}
-
-
