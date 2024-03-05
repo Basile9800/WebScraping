@@ -5,6 +5,7 @@ from .forms import PostForm
 from django.shortcuts import render
 from django.http import JsonResponse
 import logging
+from django.db import transaction
 
 # Create your views here.
 
@@ -35,59 +36,29 @@ def post_new(request):
     form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
-
 def search_by_name(request):
     if request.method == 'POST':
         name = request.POST.get('name', '')
         search_results = []
-        posts = Post.objects.all()
-        for post in posts:
-            if post.csv_file:
-                csv_data = post.read_csv_data()
-                for row in csv_data:
-                    if len(row) > 1 and name.lower() in row[1].lower():
-                        search_results.append(row)
-
+        for post in Post.objects.filter(csv_file__isnull=False):
+            csv_data = post.read_csv_data()
+            for row in csv_data:
+                if len(row) > 1 and name.lower() in row[1].lower():
+                    search_results.append(row)
         return render(request, 'blog/search_results.html', {'search_results': search_results})
-
     return render(request, 'blog/search_results.html', {'search_results': []})
-
-logger = logging.getLogger(__name__)
 
 def calculate_averages(request):
     if request.method == 'GET':
-        logger.debug("Calculating averages")
         categories = set()
-        
-        # Récupération des données des posts avec des fichiers CSV
-        posts = Post.objects.filter(csv_file__isnull=False)
-        for post in posts:
-            csv_data = post.read_csv_data()
-            for row in csv_data:
-                # Vérification de la présence de la colonne de catégorie
-                if len(row) > 3:
-                    categories.add(row[3])  # Ajouter la catégorie à l'ensemble
-        
-        # Créer une liste à partir de l'ensemble pour pouvoir la retourner en JSON
-        category_list = list(categories)
-        logger.debug("Categories: %s", category_list)
-        
-        # Renvoyer les catégories en JSON
-        return JsonResponse(category_list, safe=False)
-    
-    # Si la méthode de la requête n'est pas GET, renvoyer une réponse d'erreur
+        with transaction.atomic():  # Assure la cohérence des données en cas de modifications concurrentes
+            for post in Post.objects.filter(csv_file__isnull=False):
+                csv_data = post.read_csv_data()
+                for row in csv_data:
+                    if len(row) > 3:
+                        categories.add(row[3])
+        return JsonResponse(list(categories), safe=False)
     return JsonResponse({'error': 'Méthode de requête invalide'}, status=400)
-
-
-
-
-
-
-
-
-
-
-
              
 
 
