@@ -46,13 +46,20 @@ def search_by_name(request):
         name = request.POST.get('name', '')
         search_results = []
         posts = Post.objects.all()
+        categories = set()
+        for post in posts:
+            if post.csv_file:
+                csv_data = post.read_csv_data()
+                for row in csv_data:
+                    if len(row) > 3:
+                        categories.add(row[3])
         for post in posts:
             if post.csv_file:
                 csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 1 and name.lower() in row[1].lower():
                         search_results.append(row)
-        return render(request, 'blog/search_results.html', {'search_results': search_results})
+        return render(request, 'blog/search_results.html', {'search_results': search_results, 'categories': categories})
 
 def calculate_averages(request):
     if request.method == 'POST':
