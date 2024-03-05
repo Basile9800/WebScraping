@@ -49,19 +49,18 @@ def search_by_name(request):
 
 def calculate_averages(request):
     if request.method == 'POST':
-        selected_category = request.POST.get('selected_col4_value', '')
         categories = set()
-        posts = Post.objects.filter(csv_file__isnull=False)
+        posts = Post.objects.all()
         for post in posts:
-            csv_data = post.read_csv_data()
-            for row in csv_data:
-                if len(row) > 3:
-                    categories.add(row[3])
+            if post.csv_file:
+                csv_data = post.read_csv_data()
+                for row in csv_data:
+                    if len(row) > 3:
+                        categories.add(row[3])
         category_list = list(categories)
-        if selected_category in category_list:
-            return JsonResponse([selected_category], safe=False)
-        else:
-            return JsonResponse({'error': 'Catégorie non trouvée'}, status=404)
+        return JsonResponse(category_list, safe=False)
+    else:
+        return JsonResponse({'error': 'Méthode de requête invalide'}, status=400)
              
 
 
