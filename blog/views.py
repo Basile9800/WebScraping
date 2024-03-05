@@ -36,10 +36,6 @@ def post_new(request):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 
-from django.shortcuts import render
-from django.http import JsonResponse
-from .models import Post
-
 def search_by_name(request):
     if request.method == 'POST':
         name = request.POST.get('name', '')
@@ -47,16 +43,14 @@ def search_by_name(request):
         posts = Post.objects.all()
         for post in posts:
             if post.csv_file:
-                csv_data = post.filter_csv_data_by_name(name)
+                csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 1 and name.lower() in row[1].lower():
-                        search_results.append(row)  # Ajouter la ligne correspondante aux résultats de recherche
+                        search_results.append(row)
 
-        return render(request, 'blog/search_results.html', {'search_results': search_results})  # Renvoyer les résultats de la recherche en HTML
+        return render(request, 'blog/search_results.html', {'search_results': search_results})
+
     return render(request, 'blog/search_results.html', {'search_results': []})
-
-
-
 
 logger = logging.getLogger(__name__)
 
