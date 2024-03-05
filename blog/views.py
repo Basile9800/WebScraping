@@ -88,23 +88,6 @@ def calculate_averages(request):
 
 
 
-                    
-
-# def calculate_averages(request):
-#    col4_values = set()
-#    posts = Post.objects.all()
-#    for post in posts:
-#        if post.csv_file:
-#            csv_data = post.read_csv_data()
-#            for row in csv_data:
-#                if len(row) > 3:
-#                    col4_values.add(row[3])
-#    print("Col4 values:", col4_values)
-#    return render(request, 'blog/base.html', {'categories': col4_values})
-
-
-
-
 
 
 

@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 import csv
-from threading import Lock
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -14,32 +13,24 @@ class Post(models.Model):
     description = models.TextField(blank=True, null=True)
     csv_file = models.FileField(upload_to='csv_files/', blank=True, null=True)
     uploaded_at = models.DateTimeField(default=timezone.now)
-    _lock = Lock()
 
     def publish(self):
         self.published_date = timezone.now()
         self.save()
         
     def read_csv_data(self):
-        with self._lock:
-            data = []
-            with open(self.csv_file.path, mode='r', encoding='utf-8') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    data.append(row)
-            return data
-
+        data1 = []
+        with open(self.csv_file.path, mode='r', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                data1.append(row)
+        return data1
+    
     def filter_csv_data_by_name(self, name):
-        with self._lock:
-            data = self.read_csv_data()
-            filtered_data = [row for row in data if row and row[1] == name]
-            return filtered_data
-
-    def get_first_five_columns(self):
-        with self._lock:
-            data = self.read_csv_data()
-            first_five_columns = [row[:5] for row in data]
-            return first_five_columns
+        data2 = []
+        data2 = self.read_csv_data()
+        filtered_data = [row for row in data2 if row and row[1] == name]  
+        return filtered_data
 
     def __str__(self):
         return self.title
