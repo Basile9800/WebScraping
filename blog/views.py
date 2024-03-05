@@ -38,26 +38,30 @@ def search_by_name(request):
     if request.method == 'POST':
         name = request.POST.get('name', '')
         search_results = []
-        for post in Post.objects.filter(csv_file__isnull=False):
-            if post.csv_file:  # Vérifie si un fichier CSV est associé
+        posts = Post.objects.all()
+        for post in posts:
+            if post.csv_file:
                 csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 1 and name.lower() in row[1].lower():
                         search_results.append(row)
         return render(request, 'blog/search_results.html', {'search_results': search_results})
-    return JsonResponse({'error': 'Méthode de requête invalide'}, status=400)
 
 def calculate_averages(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        selected_category = request.POST.get('selected_col4_value', '')
         categories = set()
-        for post in Post.objects.filter(csv_file__isnull=False):
-            if post.csv_file:  # Vérifie si un fichier CSV est associé
-                csv_data = post.read_csv_data()
-                for row in csv_data:
-                    if len(row) > 3:
-                        categories.add(row[3])
-        return JsonResponse(list(categories), safe=False)
-    return JsonResponse({'error': 'Méthode de requête invalide'}, status=400)
+        posts = Post.objects.filter(csv_file__isnull=False)
+        for post in posts:
+            csv_data = post.read_csv_data()
+            for row in csv_data:
+                if len(row) > 3:
+                    categories.add(row[3])
+        category_list = list(categories)
+        if selected_category in category_list:
+            return JsonResponse([selected_category], safe=False)
+        else:
+            return JsonResponse({'error': 'Catégorie non trouvée'}, status=404)
              
 
 
