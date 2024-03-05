@@ -15,38 +15,14 @@
                 <!-- Ajoutez les autres en-têtes de colonne selon votre besoin -->
             </tr>
         </thead>
-        <tbody id="searchResults">
-            <!-- Les résultats de la recherche seront affichés ici -->
+        <tbody>
+            {% for result in search_results %}
+                <tr>
+                    {% for item in result %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <script>
-        // Récupérer les résultats de la recherche via JavaScript
-        fetch('{% url 'search_by_name' %}', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({ name: '{{ search_query }}' })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const searchResults = document.getElementById('searchResults');
-            // Afficher les résultats de la recherche dans le tableau HTML
-            data.search_results.forEach(result => {
-                const row = document.createElement('tr');
-                result.forEach(item => {
-                    const cell = document.createElement('td');
-                    cell.textContent = item;
-                    row.appendChild(cell);
-                });
-                searchResults.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des résultats de recherche :', error);
-        });
-    </script>
 {% endblock %}
