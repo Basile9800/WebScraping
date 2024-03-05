@@ -1,145 +1,138 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>RRunningStat</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Contrail+One&family=Libre+Barcode+39+Text&family=Noto+Sans+Buhid&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/css/blog.css' %}">
-    </head>
-    <body>
-        <header class="page-header">
-          <div class="container">
-              <h1><a href="/">RunningStat</a></h1>
-              <p>Bienvenue sur cette page internet !! 
-                Si vous êtes ici c'est que vous vous surement poser les questions ou trouver mes résultats de courses,
-                qui a gagné celle que j'ai faite, quelle catégorie a été la plus rapide... 
-                Et bien rassurez-vous, vous êtes au bon endroit !!!
-                En vous attardant sur ce site, vous serez tout sur les derniers résultats des courses qui sillone la France.</p>
-          </div>
-        </header>
+<head>
+    <title>RunningStat</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Contrail+One&family=Libre+Barcode+39+Text&family=Noto+Sans+Buhid&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css/blog.css' %}">
+</head>
+<body>
+<header class="page-header">
+    <div class="container">
+        <h1><a href="/">RunningStat</a></h1>
+        <p>Bienvenue sur cette page internet !!
+            Si vous êtes ici c'est que vous vous posez sûrement des questions ou que vous cherchez mes résultats de courses,
+            qui a gagné celle que j'ai faite, quelle catégorie a été la plus rapide...
+            Et bien rassurez-vous, vous êtes au bon endroit !!!
+            En vous attardant sur ce site, vous trouverez tout sur les derniers résultats des courses qui sillonnent la France.</p>
+    </div>
+</header>
 
-        <main class="container">
-            <div class="row mb-3">
-                <div class="col-md-6"> <!-- Utilisation de col-md-6 pour les écrans moyens -->
-                    <div class="search-container">
-                        <div class="row">
-                            <div class="col"> <!-- Utilisation de col pour que le contenu s'adapte automatiquement -->
-                                <div class="search-box">
-                                    <div class="p-3">
-                                        <div class="inline-title">
-                                            <h3>Chercher un coureur</h3>
-                                        </div>
-                                        <form method="post" action="{% url 'search_by_name' %}">
-                                            {% csrf_token %}
-                                            <input type="text" name="name" id="search" class="form-control">
-                                        </form>
-                                    </div>
+<main class="container">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="search-container">
+                <div class="row">
+                    <div class="col">
+                        <div class="search-box">
+                            <div class="p-3">
+                                <div class="inline-title">
+                                    <h3>Chercher un coureur</h3>
                                 </div>
+                                <form id="searchForm" method="post" action="{% url 'search_by_name' %}">
+                                    {% csrf_token %}
+                                    <input type="text" name="name" id="search" class="form-control">
+                                </form>
                             </div>
                         </div>
-                    </div>                                        
-                </div>
-                <div class="col-md-6"> <!-- Utilisation de col-md-6 pour les écrans moyens -->
-                    <div class="search-container">
-                        <div class="row">
-                            <div class="col"> <!-- Utilisation de col pour que le contenu s'adapte automatiquement -->
-                                <div class="search-box">
-                                    <div class="p-3">
-                                        <div class="inline-title">
-                                            <h3>Choisir une categorie</h3>
-                                        </div>
-                                        <form id="categoryForm" method="post" action="{% url 'calculate_averages' %}">
-                                            {% csrf_token %}
-                                            <select id="categorySelect" name="selected_col4_value" class="form-select" title="Sélectionnez une catégorie">
-                                                {% for category in categories %}
-                                                    <option value="{{ category }}">{{ category }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                                        
-                </div>
-            </div>   
-            
-            <div class="row">
-                <div class="col">
-                    <div id="result" class="text-center mb-3"></div> <!-- Ajoutez cet élément pour afficher l'image -->
+                    </div>
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="col">
-                {% block content %}
-                {% endblock %}
+        </div>
+        <div class="col-md-6">
+            <div class="search-container">
+                <div class="row">
+                    <div class="col">
+                        <div class="search-box">
+                            <div class="p-3">
+                                <div class="inline-title">
+                                    <h3>Choisir une catégorie</h3>
+                                </div>
+                                <select id="categorySelect" class="form-select" title="Sélectionnez une catégorie">
+                                    {% for category in categories %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> 
-        
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var categorySelect = document.getElementById('categorySelect');
-                    var resultDiv = document.getElementById('result');
-                
-                    categorySelect.addEventListener('change', function() {
-                        var selectedCategory = categorySelect.value;
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', '{% url 'calculate_averages' %}', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        
-                        // Ajouter le jeton CSRF aux en-têtes de la requête
-                        var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-                        xhr.setRequestHeader("X-CSRFToken", csrfToken);
-                        
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 200) {
-                                    // Afficher la réponse JSON renvoyée
-                                    var responseData = JSON.parse(xhr.responseText);
-                                    resultDiv.innerHTML = ""; // Nettoyer le contenu précédent
-                                    // Afficher les données reçues
-                                    for (var i = 0; i < responseData.length; i++) {
-                                        resultDiv.innerHTML += '<p>' + responseData[i] + '</p>';
-                                    }
-                                    // Changer l'image en fonction de la catégorie sélectionnée
-                                    var imgSrc = "/static/css/css/" + selectedCategory + ".png"; // ou l'extension de votre image
-                                    resultDiv.innerHTML += '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">'; // Ajouter l'image à l'élément 'result'
-                                } else {
-                                    // Afficher une erreur en cas de problème avec la requête
-                                    resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
-                                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="result" class="text-center mb-3"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var categorySelect = document.getElementById('categorySelect');
+            var resultDiv = document.getElementById('result');
+
+            categorySelect.addEventListener('change', function() {
+                var selectedCategory = categorySelect.value;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{% url 'calculate_averages' %}', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                // Ajouter le jeton CSRF aux en-têtes de la requête
+                var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            var responseData = JSON.parse(xhr.responseText);
+                            resultDiv.innerHTML = ""; // Nettoyer le contenu précédent
+                            for (var i = 0; i < responseData.length; i++) {
+                                resultDiv.innerHTML += '<p>' + responseData[i] + '</p>';
                             }
-                        };
-                        xhr.send('selected_col4_value=' + selectedCategory);
-                    });
-                
-                    var searchForm = document.getElementById('searchForm');
-                    searchForm.addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        var formData = new FormData(searchForm);
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', '{% url 'search_by_name' %}', true);
-                        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 200) {
-                                    resultDiv.innerHTML = xhr.responseText;
-                                } else {
-                                    resultDiv.innerHTML = '<p>Erreur : Impossible d\'effectuer la recherche.</p>';
-                                }
-                            }
-                        };
-                        xhr.send(formData);
-                    });
-                });                                
-            </script>                                         
-        </main>    
-    </body>
+                            var imgSrc = "/static/css/css/" + selectedCategory + ".png";
+                            resultDiv.innerHTML += '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">';
+                        } else {
+                            resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
+                        }
+                    }
+                };
+                xhr.send('selected_col4_value=' + selectedCategory);
+            });
+
+            var searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(searchForm);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{% url 'search_by_name' %}', true);
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            resultDiv.innerHTML = xhr.responseText;
+                        } else {
+                            resultDiv.innerHTML = '<p>Erreur : Impossible d\'effectuer la recherche.</p>';
+                        }
+                    }
+                };
+                xhr.send(formData);
+            });
+        });
+    </script>
+</main>
+</body>
 </html>
