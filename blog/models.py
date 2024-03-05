@@ -19,23 +19,25 @@ class Post(models.Model):
         self.save()
         
     def read_csv_data(self):
-        data = []
-        with open(self.csv_file.path, mode='r', encoding='utf-8') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                data.append(row)
-        return data
-    
+        with self._lock:
+            data = []
+            with open(self.csv_file.path, mode='r', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    data.append(row)
+            return data
+
     def filter_csv_data_by_name(self, name):
-        data = self.read_csv_data()
-        filtered_data = [row for row in data if row and row[1] == name]  
-        return filtered_data
-    
+        with self._lock:
+            data = self.read_csv_data()
+            filtered_data = [row for row in data if row and row[1] == name]
+            return filtered_data
+
     def get_first_five_columns(self):
-        data = self.read_csv_data()
-        # Extraction des cinq premières colonnes
-        first_five_columns = [row[:7] for row in data]
-        return first_five_columns
+        with self._lock:
+            data = self.read_csv_data()
+            first_five_columns = [row[:5] for row in data]
+            return first_five_columns
 
     def __str__(self):
         return self.title
