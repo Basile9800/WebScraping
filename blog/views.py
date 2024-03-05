@@ -2,10 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post 
 from .forms import PostForm 
-from django.shortcuts import render
 from django.http import JsonResponse
-import logging
-from django.db import transaction
+
 
 # Create your views here.
 
@@ -41,19 +39,19 @@ def search_by_name(request):
         name = request.POST.get('name', '')
         search_results = []
         for post in Post.objects.filter(csv_file__isnull=False):
-            if post.csv_file:  
+            if post.csv_file:  # Vérifie si un fichier CSV est associé
                 csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 1 and name.lower() in row[1].lower():
                         search_results.append(row)
         return render(request, 'blog/search_results.html', {'search_results': search_results})
-    return render(request, 'blog/search_results.html', {'search_results': []})
+    return JsonResponse({'error': 'Méthode de requête invalide'}, status=400)
 
 def calculate_averages(request):
     if request.method == 'GET':
         categories = set()
         for post in Post.objects.filter(csv_file__isnull=False):
-            if post.csv_file:  
+            if post.csv_file:  # Vérifie si un fichier CSV est associé
                 csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 3:
