@@ -52,8 +52,8 @@ def search_by_name(request):
                     if len(row) > 1 and name.lower() in row[1].lower():
                         search_results.append(row)  # Ajouter la ligne correspondante aux résultats de recherche
 
-        return render(request, 'blog/search_result.html', {'search_results': search_results})  # Renvoyer les résultats de la recherche en HTML
-    return render(request, 'blog/search_result.html', {'search_results': []})
+        return render(request, 'blog/search_results.html', {'search_results': search_results})  # Renvoyer les résultats de la recherche en HTML
+    return render(request, 'blog/search_results.html', {'search_results': []})
 
 
 
