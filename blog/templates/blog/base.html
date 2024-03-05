@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Contrail+One&family=Libre+Barcode+39+Text&family=Noto+Sans+Buhid&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/css/blog.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
     </head>
     <body>
         <header class="page-header">
@@ -68,7 +68,14 @@
                         </div>
                     </div>                                        
                 </div>
-            </div>                                                                                             
+            </div>   
+            
+            <div class="row">
+                <div class="col">
+                    <div id="result" class="text-center mb-3"></div> <!-- Ajoutez cet élément pour afficher l'image -->
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col">
                 {% block content %}
@@ -79,6 +86,8 @@
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     var categorySelect = document.getElementById('categorySelect');
+                    var resultDiv = document.getElementById('result');
+            
                     categorySelect.addEventListener('change', function() {
                         var selectedCategory = categorySelect.value;
                         var xhr = new XMLHttpRequest();
@@ -92,18 +101,26 @@
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState === 4) {
                                 if (xhr.status === 200) {
-                                    // Afficher la réponse HTML renvoyée dans un élément avec l'ID 'result'
-                                    document.getElementById('result').innerHTML = xhr.responseText;
+                                    // Afficher la réponse JSON renvoyée
+                                    var responseData = JSON.parse(xhr.responseText);
+                                    resultDiv.innerHTML = ""; // Nettoyer le contenu précédent
+                                    // Afficher les données reçues
+                                    for (var i = 0; i < responseData.length; i++) {
+                                        resultDiv.innerHTML += '<p>' + responseData[i] + '</p>';
+                                    }
+                                    // Changer l'image en fonction de la catégorie sélectionnée
+                                    var imgSrc = "/static/css/" + selectedCategory + ".png"; // ou l'extension de votre image
+                                    resultDiv.innerHTML = '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">'; // Ajouter l'image à l'élément 'result'
                                 } else {
                                     // Afficher une erreur en cas de problème avec la requête
-                                    document.getElementById('result').innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
+                                    resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
                                 }
                             }
                         };
                         xhr.send('selected_col4_value=' + selectedCategory);
                     });
                 });                
-            </script>                             
+            </script>                                         
         </main>    
     </body>
 </html>
