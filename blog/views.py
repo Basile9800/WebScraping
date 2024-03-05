@@ -41,18 +41,19 @@ def search_by_name(request):
         name = request.POST.get('name', '')
         search_results = []
         for post in Post.objects.filter(csv_file__isnull=False):
-            csv_data = post.read_csv_data()
-            for row in csv_data:
-                if len(row) > 1 and name.lower() in row[1].lower():
-                    search_results.append(row)
+            if post.csv_file:  
+                csv_data = post.read_csv_data()
+                for row in csv_data:
+                    if len(row) > 1 and name.lower() in row[1].lower():
+                        search_results.append(row)
         return render(request, 'blog/search_results.html', {'search_results': search_results})
     return render(request, 'blog/search_results.html', {'search_results': []})
 
 def calculate_averages(request):
     if request.method == 'GET':
         categories = set()
-        with transaction.atomic():  # Assure la cohérence des données en cas de modifications concurrentes
-            for post in Post.objects.filter(csv_file__isnull=False):
+        for post in Post.objects.filter(csv_file__isnull=False):
+            if post.csv_file:  
                 csv_data = post.read_csv_data()
                 for row in csv_data:
                     if len(row) > 3:
