@@ -103,7 +103,7 @@
                                     // Changer l'image en fonction de la catégorie sélectionnée
                                     var imgSrc = "/static/css/css/" + selectedCategory + "1.png"; // ou l'extension de votre image
                                     var imgSrc2 = "/static/css/css/" + selectedCategory + "2.png";
-                                    resultDiv.innerHTML += '<div class="row"><div class="col-md-6"><img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid"></div><div class="col-md-6"><img src="' + imgSrc2 + '" alt="' + selectedCategory + '" class="img-fluid"></div></div>';
+                                    resultDiv.innerHTML += '<div class="row"><div class="col-md-11"><img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid"></div><div class="col-md-11"><img src="' + imgSrc2 + '" alt="' + selectedCategory + '" class="img-fluid"></div></div>';
                                 } else {
                                     // Afficher une erreur en cas de problème avec la requête
                                     resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
