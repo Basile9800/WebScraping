@@ -93,6 +93,7 @@ h1 {
     text-decoration: none;
 }
 
+/*
 .col h2 a,
 .col h2 a:visited,
 .col h2 a:active {
@@ -121,6 +122,31 @@ h2 {
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
 }
+*/
+
+.col h2 a,
+.col h2 a:visited,
+.col h2 a:active {
+    font-family: 'Libre Barcode 39 Text', system-ui;
+    background-color: #800000d4; 
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 50pt;
+    -webkit-text-stroke-width: 1px; 
+    -webkit-text-stroke-color: #000000;
+    text-decoration: none;
+}
+
+h2 {
+    font-family: 'Libre Barcode 39 Text', system-ui;
+    background-color: #800000d4; 
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 50pt;
+    -webkit-text-stroke-width: 1px; 
+    -webkit-text-stroke-color: #000000;
+}
+
 
 .post > .date,
 .post > .actions {
