@@ -105,8 +105,10 @@
                                     var responseData = JSON.parse(xhr.responseText);
                                     resultDiv.innerHTML = ""; // Nettoyer le contenu précédent
                                     // Changer l'image en fonction de la catégorie sélectionnée
-                                    var imgSrc = "/static/css/css/" + selectedCategory + ".png"; // ou l'extension de votre image
+                                    var imgSrc = "/static/css/css/" + selectedCategory + "1.png"; // ou l'extension de votre image
+                                    var imgSrc2 = "/static/css/css/" + selectedCategory.category2 + "2.png";
                                     resultDiv.innerHTML += '<img src="' + imgSrc + '" alt="' + selectedCategory + '" class="img-fluid mb-3">'; // Ajouter l'image à l'élément 'result'
+                                    resultDiv.innerHTML += '<img src="' + imgSrc2 + '" alt="' + selectedCategory + '" class="img-fluid mx-2">';
                                 } else {
                                     // Afficher une erreur en cas de problème avec la requête
                                     resultDiv.innerHTML = '<p>Erreur : Impossible de calculer la moyenne de vitesse.</p>';
