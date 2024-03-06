@@ -230,8 +230,3 @@ h2 {
 .table-row {
     border-bottom: 1px solid #800000d4; 
 }
-
-#result img {
-    max-width: 50%; 
-    max-height: 50%;
-}
