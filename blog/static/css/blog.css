@@ -45,7 +45,7 @@ h1 {
 */
 
 .date {
-    color: #828282;
+    color: #eaeaea;
 }
 
 .save {
@@ -93,10 +93,11 @@ h1 {
 .post h2 a:active {
     font-family: 'Noto Sans Buhid', system-ui;
     color: #ffffff; 
-    font-size: 50pt;
+    font-size: 40pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 .post p {
@@ -142,19 +143,21 @@ h2 {
 .col h2 a:active {
     font-family: 'Noto Sans Buhid', system-ui;
     color: #ffffff; 
-    font-size: 50pt;
+    font-size: 40pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 h2 {
     font-family: 'Noto Sans Buhid', system-ui;
     color: #ffffff; 
-    font-size: 50pt;
+    font-size: 40pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 
@@ -225,8 +228,4 @@ h2 {
 
 .table-row td {
     color: #800000d4; 
-}
-
-.table-row {
-    border-bottom: 1px solid #800000d4; 
 }
