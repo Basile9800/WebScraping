@@ -182,3 +182,15 @@ h2 {
     font-size: 20pt;
     display: inline;
 }
+
+.table-header th {
+    color: #800000d4; 
+}
+
+.table-row td {
+    color: #800000d4; 
+}
+
+.table-row {
+    border-bottom: 1px solid #800000d4; 
+}

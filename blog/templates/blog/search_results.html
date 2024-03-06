@@ -1,10 +1,9 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h2>Resultats de la recherche</h2>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table-header">
                 <th>Place</th>
                 <th>Nom</th>
                 <th>Temps</th>
@@ -17,7 +16,7 @@
         </thead>
         <tbody>
             {% for result in search_results %}
-                <tr>
+                <tr class="table-row">
                     <td>{{ result.0 }}</td>  <!-- Première colonne -->
                     <td>{{ result.1 }}</td>  <!-- Deuxième colonne -->
                     <td>{{ result.2 }}</td>  <!-- Troisième colonne -->
