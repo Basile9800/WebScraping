@@ -92,8 +92,7 @@ h1 {
 .post h2 a:visited,
 .post h2 a:active {
     font-family: 'Libre Barcode 39 Text', system-ui;
-    background-color: #800000d4; 
-    color: transparent;
+    color: #800000d4; 
     -webkit-text-fill-color: transparent;
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
@@ -143,8 +142,7 @@ h2 {
 .col h2 a:visited,
 .col h2 a:active {
     font-family: 'Libre Barcode 39 Text', system-ui;
-    background-color: #800000d4; 
-    color: transparent;
+    color: #800000d4; 
     -webkit-text-fill-color: transparent;
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
@@ -154,12 +152,12 @@ h2 {
 
 h2 {
     font-family: 'Libre Barcode 39 Text', system-ui;
-    background-color: #800000d4; 
-    color: transparent;
+    color: #800000d4; 
     -webkit-text-fill-color: transparent;
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
+    text-decoration: none;
 }
 
 
