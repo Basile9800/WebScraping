@@ -91,8 +91,8 @@ h1 {
 .post h2 a,
 .post h2 a:visited,
 .post h2 a:active {
-    font-family: 'Libre Barcode 39 Text', system-ui;
-    color: #800000d4; 
+    font-family: 'Noto Sans Buhid', system-ui;
+    color: #ffffff; 
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
@@ -101,7 +101,7 @@ h1 {
 
 .post p {
     font-family: 'Noto Sans Buhid', system-ui;
-    color: #000000;
+    color: #ffffff;
     font-size: 16pt;
     text-decoration: none;
 }
@@ -140,8 +140,8 @@ h2 {
 .col h2 a,
 .col h2 a:visited,
 .col h2 a:active {
-    font-family: 'Libre Barcode 39 Text', system-ui;
-    color: #800000d4; 
+    font-family: 'Noto Sans Buhid', system-ui;
+    color: #ffffff; 
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
@@ -149,8 +149,8 @@ h2 {
 }
 
 h2 {
-    font-family: 'Libre Barcode 39 Text', system-ui;
-    color: #800000d4; 
+    font-family: 'Noto Sans Buhid', system-ui;
+    color: #ffffff; 
     font-size: 50pt;
     -webkit-text-stroke-width: 1px; 
     -webkit-text-stroke-color: #000000;
